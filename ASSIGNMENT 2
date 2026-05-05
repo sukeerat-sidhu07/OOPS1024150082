@@ -1,0 +1,404 @@
+q1
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Student
+{
+    string name;
+    int rollNo;
+    string degree;
+    string hostel;
+    float cgpa;
+
+    void addDetails()
+    {
+        cout << "Enter name: ";
+        cin >> name;
+
+        cout << "Enter roll number: ";
+        cin >> rollNo;
+
+        cout << "Enter degree: ";
+        cin >> degree;
+
+        cout << "Enter hostel name: ";
+        cin >> hostel;
+
+        cout << "Enter CGPA: ";
+        cin >> cgpa;
+    }
+
+    void updateDetails()
+    {
+        cout << "Update name: ";
+        cin >> name;
+
+        cout << "Update degree: ";
+        cin >> degree;
+    }
+
+    void updateCGPA()
+    {
+        cout << "Enter new CGPA: ";
+        cin >> cgpa;
+    }
+
+    void updateHostel()
+    {
+        cout << "Enter new hostel name: ";
+        cin >> hostel;
+    }
+
+    void displayDetails()
+    {
+        cout << "\nStudent Details";
+        cout << "\nName: " << name;
+        cout << "\nRoll No: " << rollNo;
+        cout << "\nDegree: " << degree;
+        cout << "\nHostel: " << hostel;
+        cout << "\nCGPA: " << cgpa;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.addDetails();
+    s.displayDetails();
+
+    s.updateCGPA();
+    s.updateHostel();
+
+    s.displayDetails();
+
+    return 0;
+}
+ \\  q2 
+class Student
+{
+private: // only accessible inside the class
+    string name;
+    int rollNo;
+    string degree;
+    string hostel;
+    float cgpa;
+
+    void updateDetails() // private function
+    {
+        cout << "Update name: ";
+        cin >> name;
+        cout << "Update degree: ";
+        cin >> degree;
+    }
+
+public: // accessible outside the class
+    void addDetails()
+    {
+        cout << "Enter name: ";
+        cin >> name;
+
+        cout << "Enter roll number: ";
+        cin >> rollNo;
+
+        cout << "Enter degree: ";
+        cin >> degree;
+
+        cout << "Enter hostel name: ";
+        cin >> hostel;
+
+        cout << "Enter CGPA: ";
+        cin >> cgpa;
+    }
+
+    void updateCGPA()
+    {
+        cout << "Enter new CGPA: ";
+        cin >> cgpa;
+    }
+
+    void updateHostel()
+    {
+        cout << "Enter new hostel name: ";
+        cin >> hostel;
+    }
+
+    void displayDetails()
+    {
+        cout << "\nStudent Details";
+        cout << "\nName: " << name;
+        cout << "\nRoll No: " << rollNo;
+        cout << "\nDegree: " << degree;
+        cout << "\nHostel: " << hostel;
+        cout << "\nCGPA: " << cgpa;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.addDetails();
+    s.displayDetails();
+
+    s.updateCGPA();   // public
+    s.updateHostel(); // public
+
+    s.displayDetails();
+
+    return 0;
+}
+
+q3  
+
+
+#include <iostream>
+using namespace std;
+
+class Demo
+{
+private:
+    void privateFunction() // private member function
+    {
+        cout << "Private function is called!" << endl;
+    }
+
+public:
+    void publicFunction() // public member function
+    {
+        cout << "Public function is called!" << endl;
+
+        
+        privateFunction();
+    }
+};
+
+int main()
+{
+    Demo obj;
+
+    obj.publicFunction(); 
+    
+
+    return 0;
+}
+
+
+
+q4 
+
+
+
+#include <iostream>
+using namespace std;
+
+class Rectangle
+{
+private:
+    int width;
+    int height;
+
+public:
+    void getdata()
+    {
+        cout << "Enter width: ";
+        cin >> width;
+
+        cout << "Enter height: ";
+        cin >> height;
+    }
+
+    void calculatearea()
+    {
+        int area = width * height;
+        cout << "Area of the rectangle: " << area << endl;
+    }
+};
+
+int main()
+{
+    Rectangle r;
+
+    r.getdata();        // initialize width and height
+    r.calculatearea();  // calculate and display area
+
+    return 0;
+}
+
+
+
+
+q5
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class Complex
+{
+private:
+    float real;
+    float imaginary;
+
+public:
+    void setComplex(float r, float i)
+    {
+        real = r;
+        imaginary = i;
+    }
+
+    void displayComplex()
+    {
+        cout << real << " + " << imaginary << "i" << endl;
+    }
+
+    // Function to add two Complex numbers (pass objects and return object)
+    Complex addComplex(Complex c)
+    {
+        Complex temp;
+        temp.real = real + c.real;
+        temp.imaginary = imaginary + c.imaginary;
+        return temp;
+    }
+};
+
+int main()
+{
+    Complex c1, c2, sum;
+    float r, i;
+
+    cout << "Enter first complex number:" << endl;
+    cout << "Real part: ";
+    cin >> r;
+    cout << "Imaginary part: ";
+    cin >> i;
+    c1.setComplex(r, i);
+
+    cout << "Enter second complex number:" << endl;
+    cout << "Real part: ";
+    cin >> r;
+    cout << "Imaginary part: ";
+    cin >> i;
+    c2.setComplex(r, i);
+
+    cout << "\nFirst complex number: ";
+    c1.displayComplex();
+
+    cout << "Second complex number: ";
+    c2.displayComplex();
+
+    // Add two complex numbers
+    sum = c1.addComplex(c2);
+    cout << "\nSum of complex numbers: ";
+    sum.displayComplex();
+
+    return 0;
+}
+
+
+
+
+
+q6
+
+
+
+#include <iostream>
+using namespace std;
+
+// Global variable
+int x = 100;
+
+class Demo
+{
+private:
+    static int count; // static variable
+
+public:
+    void displayMessage(); // function declared here (defined outside)
+    
+    void showLocalGlobal(int x)
+    {
+        cout << "Local x = " << x << endl;
+        cout << "Global x = " << ::x << endl; // access global x using scope resolution
+    }
+
+    void showStatic()
+    {
+        count++; // access static variable
+        cout << "Static count = " << count << endl;
+    }
+};
+
+// Define static variable outside the class using scope resolution
+int Demo::count = 0;
+
+// Define function outside the class using scope resolution
+void Demo::displayMessage()
+{
+    cout << "Function defined outside the class using scope resolution!" << endl;
+}
+
+int main()
+{
+    Demo d;
+
+    // (a) Call class function defined outside the class
+    d.displayMessage();
+
+    // (b) Access global variable with same name as local variable
+    int x = 50; // local variable
+    d.showLocalGlobal(x);
+
+    // (c) Access static variable
+    d.showStatic();
+    d.showStatic();
+
+    // (d) Use inbuilt libraries with scope resolution operator
+    std::cout << "Using std::cout with scope resolution" << std::endl;
+    std::cin.ignore(); // using std::cin as example
+
+    return 0;
+}
+
+
+
+
+q7  
+
+
+
+#include <iostream>
+using namespace std;
+
+namespace First
+{
+    int x = 10;
+    void show()
+    {
+        cout << "First namespace x = " << x << endl;
+    }
+}
+
+namespace Second
+{
+    int x = 20;
+    void show()
+    {
+        cout << "Second namespace x = " << x << endl;
+    }
+}
+
+int main()
+{
+    First::show();
+    Second::show();
+    return 0;
+}
+
+
