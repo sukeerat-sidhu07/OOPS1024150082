@@ -1,0 +1,309 @@
+//q1 
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    int roll;
+    float marks;
+
+public:
+    Student(int roll, float marks) {
+        this->roll = roll;
+        this->marks = marks;
+    }
+
+    void display() {
+        cout << "Roll Number: " << roll << endl;
+        cout << "Marks: " << marks << endl;
+    }
+};
+
+int main() {
+    Student s1(101, 85.5);
+
+    Student* ptr;
+    ptr = &s1;
+
+    cout << "Using dot operator:" << endl;
+    s1.display();
+
+    cout << "\nUsing arrow operator:" << endl;
+    ptr->display();
+
+    return 0;
+}
+
+//q2 
+
+#include <iostream>
+using namespace std;
+
+class B;  
+
+class A {
+private:
+    int x;
+
+public:
+    A(int val) {
+        x = val;
+    }
+
+    friend void swapValues(A &obj1, B &obj2);
+
+    void display() {
+        cout << "Value of x in A: " << x << endl;
+    }
+};
+
+class B {
+private:
+    int y;
+
+public:
+    B(int val) {
+        y = val;
+    }
+
+    friend void swapValues(A &obj1, B &obj2);
+
+    void display() {
+        cout << "Value of y in B: " << y << endl;
+    }
+};
+
+void swapValues(A &obj1, B &obj2) {
+    int temp;
+    temp = obj1.x;
+    obj1.x = obj2.y;
+    obj2.y = temp;
+}
+
+int main() {
+    A objA(10);
+    B objB(20);
+
+    cout << "Before Swapping:" << endl;
+    objA.display();
+    objB.display();
+
+    swapValues(objA, objB);
+
+    cout << "\nAfter Swapping:" << endl;
+    objA.display();
+    objB.display();
+
+    return 0;
+}
+
+//q3
+
+#include <iostream>
+using namespace std;
+
+class B;
+
+class A {
+private:
+    int x;
+
+public:
+    A(int val) {
+        x = val;
+    }
+
+    friend int addValues(A, B);
+
+    void display() {
+        cout << "Value of x in A: " << x << endl;
+    }
+};
+
+class B {
+private:
+    int y;
+
+public:
+    B(int val) {
+        y = val;
+    }
+
+    friend int addValues(A, B);
+
+    void display() {
+        cout << "Value of y in B: " << y << endl;
+    }
+};
+
+int addValues(A obj1, B obj2) {
+    return obj1.x + obj2.y;
+}
+
+int main() {
+    A objA(15);
+    B objB(25);
+
+    objA.display();
+    objB.display();
+
+    int sum = addValues(objA, objB);
+
+    cout << "Sum of values: " << sum << endl;
+
+    return 0;
+}
+
+//q4
+#include <iostream>
+using namespace std;
+
+class B;
+
+class A {
+private:
+    int x;
+
+public:
+    A(int val) {
+        x = val;
+    }
+
+    friend class B;
+
+    void display() {
+        cout << "Value of x in A: " << x << endl;
+    }
+};
+
+class B {
+public:
+    void show(A obj) {
+        cout << "Accessing private member of A from friend class B" << endl;
+        cout << "Value of x: " << obj.x << endl;
+    }
+};
+
+int main() {
+    A objA(50);
+    B objB;
+
+    objA.display();
+    objB.show(objA);
+
+    return 0;
+}
+
+//q5
+
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+    float length;
+    float breadth;
+
+public:
+    void setData(float l, float b) {
+        length = l;
+        breadth = b;
+    }
+
+    float area() {
+        return length * breadth;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of rectangles: ";
+    cin >> n;
+
+    Rectangle r[n];
+
+    for(int i = 0; i < n; i++) {
+        float l, b;
+        cout << "Enter length and breadth of rectangle " << i + 1 << ": ";
+        cin >> l >> b;
+        r[i].setData(l, b);
+    }
+
+    cout << "\nAreas of Rectangles:\n";
+
+    for(int i = 0; i < n; i++) {
+        cout << "Rectangle " << i + 1 << " Area = " << r[i].area() << endl;
+    }
+
+    return 0;
+}
+
+//q6
+
+#include <iostream>
+using namespace std;
+
+inline int cube(int x) {
+    return x * x * x;
+}
+
+int main() {
+    int num;
+
+    cout << "Enter a number: ";
+    cin >> num;
+
+    cout << "Cube of " << num << " = " << cube(num) << endl;
+
+    return 0;
+}
+
+//q7
+
+#include <iostream>
+using namespace std;
+
+class Number {
+private:
+    int value;
+
+public:
+    Number(int v = 0) {
+        value = v;
+    }
+
+    void setValue(int v) {
+        value = v;
+    }
+
+    int getValue() {
+        return value;
+    }
+};
+
+Number addByValue(Number obj) {
+    obj.setValue(obj.getValue() + 10);
+    return obj;
+}
+
+Number addByReference(Number &obj) {
+    obj.setValue(obj.getValue() + 20);
+    return obj;
+}
+
+int main() {
+    Number n1(5);
+
+    Number result1 = addByValue(n1);
+    cout << "After pass by value:" << endl;
+    cout << "Original object value: " << n1.getValue() << endl;
+    cout << "Returned object value: " << result1.getValue() << endl;
+
+    Number result2 = addByReference(n1);
+    cout << "\nAfter pass by reference:" << endl;
+    cout << "Original object value: " << n1.getValue() << endl;
+    cout << "Returned object value: " << result2.getValue() << endl;
+
+    return 0;
+}
+
